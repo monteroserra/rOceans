@@ -52,7 +52,7 @@ oceanDiversity = function (occurrences,
 {
 
   data = occurrences[, c(species_name, lat_name, long_name)]
-  species = unique(data[, species_name])
+  species = unlist(unique(data[, species_name]))
   
   if (extent == "manual") {
     grid <- raster(xmn = min_long, xmx = max_long, ymn = min_lat, 
@@ -88,8 +88,6 @@ oceanDiversity = function (occurrences,
   values(grid) <- 0
   
   species_abundance_mx = raster::as.data.frame(grid, xy = T)
-  
-  #ext = extent(c(min_long, max_long, min_lat, max_lat))
   
   for (i in 1:NROW(species)) {
 

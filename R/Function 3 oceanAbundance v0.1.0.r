@@ -1,4 +1,4 @@
-#' Function 3 oceanAbundGrid: compute spatial patterns of abundance of occurrences at 
+#' Function 3 oceanAbundance: compute spatial patterns of abundance of occurrences at 
 #' multiple scales
 #'
 #' @author I. Montero-Serra,  E. Aspillaga, V. Barve, N Barve & K. Kaplan,
@@ -24,7 +24,7 @@
 #' @export
 #' 
 
-oceanAbundGrid = function (occurrences, 
+oceanAbundance = function (occurrences, 
                            lat_name = "decimalLatitude", 
                            long_name = "decimalLongitude", 
                            extent = "regions", 

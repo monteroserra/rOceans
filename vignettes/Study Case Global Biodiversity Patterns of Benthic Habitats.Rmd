@@ -1,0 +1,133 @@
+---
+tittle: Global Biodiversity Patterns in Marine Benthic Ecosystems using rOceans
+author: I. Montero-Serra
+date: 30/Jul/2018
+output: html_document
+---
+#  Global Biodiversity Patterns in Marine Benthic Ecosystems using rOceans
+rOceans is an R Package for exploring spatial trends in marine biodiversity and conservation. It contains functions to access and explore spatial patterns of marine biodiversity. 
+
+Here I will present a study case analyzing patterns of biodiversity in world's marine benthic ecosystems using rOceans and raw data from OBIS and GBIF
+
+## Introduction
+
+## rOceans functions list
+
+(1) *oceanDataAccess()* Access occurrences data from OBIS and GBIF for a list of species and provides options for data quality checks
+
+(2) *oceanDataCheck()* Automatically merges, checks and filters big datasets from OBIS and GBIF
+
+(3) *oceanAbundance()* Computes global or regional spatial grids of abundance of occurrences per grid cell at multiple scales
+
+(4) *oceanMaps()* rapid map visualization tool for representing spatial trends in biodiversity
+
+(5) *oceanDiversity()* computes spatial explicit layers of several diversity metrics including richness, corrected richness, Simpson and Shannon diversity
+
+(6) *oceanEnvironment()* Automatic access to data on global spatial layers of multiple environmental drivers and explores relationships to marine biodiversity metrics
+
+(7) *oceanFuture()* Access current and future environmental data layers and computes expected trends
+
+(8) *oceanHotspots()* classify sites in hotspots and coldspots of biodiversity
+
+(9) *oceanVulnerability()* explores vulnerability of sites by linking biodiversity classifications and expected warming trends
+
+
+Download rOceansNew from GitHub and load the package
+```{r}
+invisible(devtools::install_github("monteroserra/rOceans"))
+invisible(library(rOceans))
+
+```
+
+Data from OBIS and GBIF on eight major marine sessile organisms
+```{r}
+
+setwd("C:/Users/monteroserra/Desktop/data")
+
+load("Anthozoa_Total_Checked.RData")
+load("Bryozoa_Total_Checked.RData")
+load("Ascidiacea_Total_Checked.gz")
+load("Bivalvia_Total_Checked.RData")
+load("Cirripeda_Total_Checked.gz")
+load("Seagrasses_Total_Checked.gz")
+Seagrasses_Total_Checked = Macroalgae_Total_Checked
+
+load("Phaeophyceae_Total_Checked.gz")
+load("Polychaeta_Total_Checked.RData")
+load("Porifera_Total_Checked.gz")
+load("Rhodophyta_Total_Checked.gz")
+load("Rotifera_Total_Checked.gz")
+load("Ulvophyceae_Total_Checked.gz")
+
+Macroalgae_Total_Checked = rbind(Phaeophyceae_Total_Checked,
+                                 Rhodophyta_Total_Checked,
+                                 Rotifera_Total_Checked,
+                                 Ulvophyceae_Total_Checked)
+
+Cirripeda_Polychaeta_Total_Checked = rbind(Cirripeda_Total_Checked,Polychaeta_Total_Checked)
+
+
+Marine_sessile_total = rbind(
+              Anthozoa_Total_Checked,
+              Bryozoa_Total_Checked,
+              Porifera_Total_Checked,
+              Ascidiacea_Total_Checked, 
+              Bivalvia_Total_Checked,
+              Cirripeda_Polychaeta_Total_Checked,
+              Seagrasses_Total_Checked,
+              Macroalgae_Total_Checked)
+
+
+
+
+```
+
+
+## Results
+
+
+
+Compute and visualize abundance trends
+
+```{r}
+
+Anthozoa_abundance = oceanAbundGrid(occurrences = Anthozoa_Total_Checked)
+Bryozoa_abundance = oceanAbundGrid(occurrences = Bryozoa_Total_Checked)
+Porifera_abundance = oceanAbundGrid(occurrences = Porifera_Total_Checked)
+Ascidiacea_abundance = oceanAbundGrid(occurrences = Ascidiacea_Total_Checked)
+Bivalvia_abundance = oceanAbundGrid(occurrences = Bivalvia_Total_Checked)
+Cirripeda_Polychaeta_abundance = oceanAbundGrid(occurrences = Cirripeda_Polychaeta_Total_Checked)
+Macroalgae_abundance = oceanAbundGrid(occurrences = Macroalgae_Total_Checked)
+Seagrasses_abundance = oceanAbundGrid(occurrences = Seagrasses_Total_Checked)
+
+par(mfrow=c(4,2))
+
+oceanMaps(Anthozoa_abundance, logScale=T, background_color = "grey70", main = "Anthozoa",
+          low_color = "#FFF8DC", mid_color = "#CD5B45", high_color = "#9B3F2F")
+
+oceanMaps(Bryozoa_abundance, logScale=T, background_color = "grey70", main = "Bryozoa",
+          low_color = "#FFF8DC", mid_color = "#CD5B45", high_color = "#9B3F2F")
+
+oceanMaps(Ascidiacea_abundance, logScale=T, background_color = "grey70", main = "Ascidiacea",
+          low_color = "#B4EEB4", mid_color = "#6959CD", high_color = "#473C8B")
+
+oceanMaps(Porifera_abundance, logScale=T, background_color = "grey70", main = "Porifera",
+          low_color = "#B4EEB4", mid_color = "#6959CD", high_color = "#473C8B")
+
+oceanMaps(Bivalvia_abundance, logScale=T, background_color = "grey70", main = "Bivalvia",
+          low_color = "#FFF8DC", mid_color = "#CDB79E", high_color = "#8D7B6D")
+
+oceanMaps(Cirripeda_Polychaeta_abundance, logScale=T, background_color = "grey70", main = "Cirripeda & Polychaeta",
+          low_color = "#FFF8DC", mid_color = "#CDB79E", high_color = "#8D7B6D")
+
+oceanMaps(Macroalgae_abundance, logScale=T, background_color = "grey70", main = "Macroalgae",
+          low_color = "#CAFF70", mid_color = "#A2CD5A", high_color = "#006400")
+
+oceanMaps(Seagrasses_abundance, logScale=T,background_color = "grey70", main = "Seagrasses",
+          low_color = "#CAFF70", mid_color = "#A2CD5A", high_color = "#006400")
+
+
+par(mfrow=c(1,1))
+
+```
+

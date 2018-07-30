@@ -1,4 +1,4 @@
-#' Function 7 oceanEnv: downloads and links environmental variables to marine biodiversity metrics
+#' Function 5 oceanEnvironment: downloads and links environmental variables to marine biodiversity metrics
 #'
 #' @description downloads and links environmental variables to marine biodiversity metrics
 #'
@@ -12,18 +12,18 @@
 #' with marine biodiversity patterns.
 #' @export
 
-oceanEnv = function (biod_grid, 
-                     biodiv_metric = "abundance", 
-                     env_parameters=c("BO2_tempmean_ss","BO2_tempmax_ss","BO_sstrange",
+
+
+
+oceanEnvironment = function (biod_grid, 
+                            biodiv_metric = "abundance", 
+                            env_parameters=c("BO2_tempmean_ss","BO2_tempmax_ss","BO_sstrange",
                                       "BO_bathymean","BO_chlomean", "BO_salinity"), 
-                     plot=F, 
-                     log_scale=F, 
-                     colors = c("#1874CD60","#4D4DFF60","#23238E60",
+                            plot=F, 
+                            log_scale=F, 
+                            colors = c("#1874CD60","#4D4DFF60","#23238E60",
                               "#68838B60","#00CD0060", "#CDB38B60")) {
 
-
-# getting envrionmental parameters at present conditions
-  
 
 if(length(env_parameters) == 1) {
 
@@ -70,8 +70,9 @@ if(length(env_parameters) > 1 ) {
 colnames(df) = c(biodiv_metric, "x", "y", env_parameters)
 
 
-# ploting biodiversity metric ~ environmental parameters (only for single metric so far)
+head(df)
 
+# ploting biodiversity metric ~ environmental parameters (only for single metric so far)
 
 
 if (plot) {

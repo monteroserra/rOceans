@@ -1,10 +1,10 @@
-#' Function 1 oceanDivDat: allows getting presences and distribution maps  for a list of species
+#' Function 1 oceanDataAccess: allows getting presences and distribution maps  for a list of species
 #' ROxygen2 block for function #1
 #' Allows getting distribution data  for a list of species from OBIS & GBIF
 #'
 #' @author I. Montero-Serra,  E. Aspillaga, V. Barve, N Barve & K. Kaplan,
 #'
-#' @description allows getting occurrences from OBIS and GBIF for a list of species
+#' @description Access occurrences data from OBIS and GBIF for a list of species and provides options for quality check
 #'
 #' @param species_names list of species names in latin
 #'
@@ -21,11 +21,12 @@
 #' and coordiantes
 #'
 #'
-#' @details The function creates downloads occurrences data from the specific sources
-#' and stores them in a data frame.
+#' @details The function downloads occurrences data from the specific sources, provides 
+#' options for filtering errors and land-based occurrences and stores the clean data into a dataframe
+#' 
 #' @export
 
-oceanDivDat = function(species_names,
+oceanDataAccess = function(species_names,
                        data_source = "OBIS",
                        remove_duplicates=T,
                        remove_land_dots = T,
