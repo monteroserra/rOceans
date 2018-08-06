@@ -148,6 +148,7 @@ oceanDiversity = function (occurrences,
   shannon_grid = rasterize(shannon_df[, c(1, 2)], grid, field = shannon_df$shannon_div, 
                            fun = "last", background = NA)
   shannon_grid[shannon_grid == 0] <- NA
+  
   results[[4]] = shannon_grid
   
   #5 Simpson diversity grid 
@@ -161,6 +162,7 @@ oceanDiversity = function (occurrences,
   simpson_grid = rasterize(simpson_df[, c(1, 2)], grid, field = simpson_df$simpson_div, 
                            fun = "last", background = NA)
   simpson_grid[simpson_grid == 0] <- NA
+  
   results[[5]] = simpson_grid
   
   simpson_values = diversity(species_abundance_mx[, -c(1:3)], 
