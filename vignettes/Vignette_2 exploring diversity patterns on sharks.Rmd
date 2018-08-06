@@ -1,11 +1,11 @@
 ---
-tittle: Exploring Carcharhinidae sharks abundance using from GBIF and OBIS data
+tittle: Exploring Carcharhinidae sharks diversity using from GBIF and OBIS data
 author: I. Montero-Serra
-date: 30/Jul/2018
+date: 5/AUG/2018
 output: html_document
 ---
 
-# Introduction
+# Introduction - Diversity patterns in sharks using rOceans
 
 This document describes how to use rOceans for computing  spatial patterns of diversity in marine species using raw data directly downloaded from OBIS and GBIF. Here we have an example of usage for sharks of family Carcharhinidae.  
 
@@ -18,7 +18,7 @@ library(rOceans)
 ```
 
 
-#Data access and visualization of spatial patterns in occurrences
+##Data access and visualization of spatial patterns in occurrences
 
 For simplicity, we provide the dataset "Carcharhinidae_total_checked" which is the output obtained using *oceanDataCheck()* applied to raw datasets from OBIS and GBIF (see vignette 1 with Acropora example for more details on checking and filtering raw data)
 
@@ -32,29 +32,29 @@ oceanMaps(Carcharhinidae_abundance_5, logScale=T, main="Carcharhinidae abundance
 
 ```
 
-# Computing species abundance matrix - and several diversity metrics
+## Computing species abundance matrix - and several diversity metrics
 ```{r,results = "hide", warning = FALSE,  message = FALSE}
 Carcharhinidae_diversity = oceanDiversity(occurrences = Carcharhinidae_total_checked, print=F)
 
 ```
 
-# Raw species richness
+## Raw species richness
 ```{r}
 oceanMaps(Carcharhinidae_diversity[[2]],logScale=T,main = "Raw richness")
 ```
 
-# Corrected species richness 
+## Corrected species richness 
 Using a rarefaction techniques with a treshold set at 50 samples
 ```{r}
-oceanMaps(Carcharhinidae_diversity[[3]],logScale=T, main = "Corrected richness Diversity")
+oceanMaps(Carcharhinidae_diversity[[3]],logScale=T, main = "Corrected richness ")
 ```
 
-# Visualizing all diversity metrics
+## Visualizing all diversity metrics
 
 ```{r,results = "hide", warning = FALSE,  message = FALSE}
 par(mfrow=c(2,2))
-oceanMaps(Carcharhinidae_diversity[[2]],logScale=T,main = "Raw richness")
-oceanMaps(Carcharhinidae_diversity[[3]],logScale=T, main = "Corrected richness Diversity")
+oceanMaps(Carcharhinidae_diversity[[2]],logScale=T,main = "Raw species richness")
+oceanMaps(Carcharhinidae_diversity[[3]],logScale=T, main = "Corrected species richness ")
 oceanMaps(Carcharhinidae_diversity[[4]], main = "Shannon Diversity")
 oceanMaps(Carcharhinidae_diversity[[5]], main = "Simpson Diversity")
 

@@ -17,7 +17,6 @@ library(rOceans)
 
 ```
 
-
 ## First, we need to access the data and compute species diversity
 
 For simplicity, we provide the dataset "Carcharhinidae_total_checked" which is the output obtained using *oceanDataCheck()* applied to raw datasets from OBIS and GBIF (see vignette 1 with Acropora example for more details on checking and filtering raw data)
