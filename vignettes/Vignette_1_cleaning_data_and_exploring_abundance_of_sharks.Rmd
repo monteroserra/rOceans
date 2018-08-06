@@ -1,12 +1,14 @@
 ---
 tittle: Exploring Carcharinidae sharks abundance using data from GBIF and OBIS 
 author: I. Montero-Serra
-date: 30/Jul/2018
+date: 31/Jul/2018
 output: html_document
 ---
 
-#Introduction
-This document describes how to use rOceans for computing abundance spatial patterns of abundance in marine species using raw data directly downloaded from OBIS and GBIF. Here we have an example of usage for shark species of the family Carcharhinidae.
+# Introduction - Carcharinhidae sharks abundance
+
+This document describes how to use rOceans for computing spatial patterns of abundance in marine species using raw data directly downloaded from OBIS and GBIF. 
+Here we have an example of usage for shark species of the family Carcharhinidae.
 
 (1) Download rOceans from GitHub and load the package
 
@@ -41,8 +43,6 @@ Acropora_Total_Checked = oceanDataCheck(GBIF_occurrences = Acropora_GBIF,
                                         source = "GBIF_&_OBIS")
 ```
 
-# Functions for analyzing and visualizing spatial trends in marine biodiversity
-
 ## Function 3 *oceanAbundance* 
 Allows creating global or delimited spatial grids with abundance of occurrences per cell at differenc cell sizes. 
 
@@ -54,7 +54,7 @@ abundance_5 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=5)
 abundance_1 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=1)
 ```
 
-# Using oceanMaps to visualize Shark abundance patterns at different scales
+## Using oceanMaps to visualize Shark abundance patterns at different scales
 
 Grid cells of 10º lat x 10º long 
 ```{r}
@@ -71,7 +71,7 @@ Grid cells of 1º lat x 1º long
 oceanMaps(abundance_1, logScale=T, main="Sharks abundance (1x1)")
 ```
 
-#Focused analyses for specific regions
+## Focused analyses at specific ecoregions
 
 We can also specify different regions that are already pre-defined or use mannual coordinates delimiatations
 
@@ -79,7 +79,7 @@ Australia
 ```{r}
 
 abundance_Australia = oceanAbundance(occurrences = Carcharhinidae_total_checked,
-                      extent = "regions", region = "Australia")
+                      extent = "regions", region = "Australia", cell_size=1)
 
 oceanMaps(abundance_Australia, logScale=T, main="Sharks abundance in Australia")
 
@@ -89,19 +89,8 @@ Caribbean
 ```{r}
 
 abundance_Caribbean = oceanAbundance(occurrences = Carcharhinidae_total_checked,
-                      extent = "regions", region = "Caribbean")
+                      extent = "regions", region = "Caribbean", cell_size=1)
 
 oceanMaps(abundance_Caribbean, logScale=T, main="Sharks abundance in the Caribbean")
 
 ```
-
-Mediterranean
-```{r}
-
-abundance_Med = oceanAbundance(occurrences = Carcharhinidae_total_checked,
-                      extent = "regions", region = "Mediterranean")
-
-oceanMaps(abundance_Med, logScale=T, main="Sharks abundance in the Mediterranean")
-
-```
-

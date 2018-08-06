@@ -1,0 +1,52 @@
+---
+tittle: Exploring environmental drivers of species diversity in sharks
+author: I. Montero-Serra
+date: 30/Jul/2018
+output: html_document
+---
+
+# Environmental drivers of species diversity in sharks
+
+This document describes how to use rOceans for accessing environmental drivers and link them to spatial patterns of diversity in marine species. Here we show an example for sharks of family Carcharhinidae.  
+
+(1) Download rOceans from GitHub and load the package
+
+```{r, results = "hide", warning = FALSE,  message = FALSE}
+#devtools::install_github("monteroserra/rOceans")
+library(rOceans)
+
+```
+
+
+## First, we need to access the data and compute species diversity
+
+For simplicity, we provide the dataset "Carcharhinidae_total_checked" which is the output obtained using *oceanDataCheck()* applied to raw datasets from OBIS and GBIF (see vignette 1 with Acropora example for more details on checking and filtering raw data)
+
+```{r}
+data(Carcharhinidae_total_checked)
+
+Carcharhinidae_abundance_5 = oceanAbundance(occurrences = Carcharhinidae_total_checked, cell_size=5)
+
+#Visualize abundance
+oceanMaps(Carcharhinidae_abundance_5, logScale=T, main="Carcharhinidae abundance")
+
+
+
+```
+
+Computing species abundance matrix - and several diversity metrics
+```{r,results = "hide", warning = FALSE,  message = FALSE}
+Carcharhinidae_diversity = oceanDiversity(occurrences = Carcharhinidae_total_checked, print=F)
+
+```
+
+## Obtaining and using environmental drivers
+
+
+```{r,results = "hide", warning = FALSE,  message = FALSE}
+
+
+
+```
+
+
