@@ -1,17 +1,8 @@
 ---
-tittle: "Exploring ACropora corals abundance and diversity from GBIF and OBIS data"
-author: "I. Montero-Serra, E. Aspillaga, K. Kaplan, V. Barbe & N. Barve"
-date: 23/Jul/2018
-rmarkdown::html_vignette:
-  pdf_document:
-    highlight: tango
-    fig_caption: false
-fontsize: 11pt
-classoption: a4paper
-vignette: >
-  %\VignetteIndexEntry{Exploring patterns in Acropora corals abundance and diversity}
-  %\VignetteEncoding{UTF-8}
-  %\VignetteEngine{knitr::rmarkdown}
+tittle: Exploring Acropora corals abundance using from GBIF and OBIS data
+author: I. Montero-Serra
+date: 30/Jul/2018
+output: html_document
 ---
 
 ```{r setup, include = FALSE}
@@ -23,14 +14,14 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-This document describes how to use rOceans, an R package for exploring spatial trends in marine biodiversity and conservation. Here we have a examples of usage for explore spatial patterns of biodiversity in scleractinian corals of the genus Acropora. 
+This document describes how to use rOceans for computing abundance spatial patterns of abundance in marine species using raw data directly downloaded from OBIS and GBIF. Here we have an example of usage for scleractinian corals of the genus Acropora. 
 
 
-(1) Download rOceansNew from GitHub and load the package
+(1) Download rOceans from GitHub and load the package
 
-```{r}
-invisible(devtools::install_github("monteroserra/rOceansNew"))
-invisible(library(rOceansNew))
+```{r,cache.comments=FALSE}
+devtools::install_github("monteroserra/rOceans", force = T)
+library(rOceans)
 
 ```
 
@@ -61,16 +52,16 @@ Acropora_Total_Checked = oceanDataCheck(GBIF_occurrences = Acropora_GBIF,
 
 # Functions for analyzing and visualizing spatial trends in marine biodiversity
 
-## Function #3 *oceanAbundGrid* 
+## Function #3 *oceanAbundance* 
 Allows creating global or delimited spatial grids with abundance of occurrences per cell at differenc cell sizes. 
 
 Following with the Acropora example, we will use this function to compute global rasters of abundance per grid cell for Acropora species at different resolutions (10 x 10?) (5 x 5?) (1? x 1?) and (0.5 x 0.0?) using *cell_size*
 
 ```{r}
-Acropora_abundance_10x10 = oceanAbundGrid(occurrences = Acropora_Total_Checked, cell_size=10)
-Acropora_abundance_5x5 = oceanAbundGrid(occurrences = Acropora_Total_Checked, cell_size=5)
-Acropora_abundance_1x1 = oceanAbundGrid(occurrences = Acropora_Total_Checked, cell_size=1)
-Acropora_abundance_0.5x0.5 = oceanAbundGrid(occurrences = Acropora_Total_Checked, cell_size=0.5)
+Acropora_abundance_10x10 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=10)
+Acropora_abundance_5x5 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=5)
+Acropora_abundance_1x1 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=1)
+Acropora_abundance_0.5x0.5 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=0.5)
 ```
 
 ## Function #3 *oceanMaps*  
@@ -83,102 +74,4 @@ oceanMaps(Acropora_abundance_1x1, logScale=T, main="Acropora abundance (1x1)")
 oceanMaps(Acropora_abundance_0.5x0.5, logScale=T, main="Acropora abundance (0.5x0.5)")
 par(mfrow=c(1,1))
 
-```
-
-## Function #4 *oceanDiversity* 
-Allows computing several diversity metrics (shannon, richness, simpson) at global scale or for specifically delimited areas. It also provides a species abundance matrix per grid cell, to allow for further multivariate analyses. 
-
-Computing global rasters of diversity metrics: example of Acropora species
-```{r, echo = FALSE, results="hide"}
-
-Acropora_div = oceanDiversity(occurrences = Acropora_Total_Checked)
-
-Acropora_species_matrix = Acropora_div[[1]]
-Acropora_richness = Acropora_div[[2]]
-Acropora_simpson = Acropora_div[[3]]
-Acropora_shannon = Acropora_div[[4]]
-
-par(mfrow=c(2,2))
-oceanMaps(Acropora_richness, logScale=T,main="Acropora Species Richness")
-oceanMaps(Acropora_shannon, logScale=T,main="Acropora Shannon Diversity")
-oceanMaps(Acropora_simpson, logScale=T,main="Acropora Simpson Diversity")
-par(mfrow=c(1,1))
-```
-
-## Function #5 *oceanHotspots* 
-This function classifies sites into high, mid, and low diversity given any biodiversity metric (work in progress)
-```{r}
-AcroporaHotspots = oceanHotspots(biodiversity_grid = Acropora_richness)
-
-```
-
-
-# Functions for accessing and exploring environmental drivers of marine biodiversity
-
-## Function #6 *oceanEnv* 
-Allows accessing environmental layers at present conditions to explore and test potential
-drivers of marine biodiversity patterns
-
-Following with the previous example on abundance and diversity of Acropora species
-```{r}
-Acropora_abundance = oceanAbundGrid(occurrences = Acropora_Total_Checked, cell_size=5)
-
-# getting envioronmental parameters and linking them to biodiversity patterns
-abundance_environ_df = invisible(oceanEnv(biod_grid = Acropora_abundance,
-                       biodiv_metric = "abundance", 
-                       plot=T, 
-                       log_scale=T))
-``` 
-
-
-We can also explore environmental drivers of other metrics such as species richness using previously computed grids 
-```{r}
-abundance_environ_df = invisible(oceanEnv(biod_grid = Acropora_richness,
-                       biodiv_metric = "richness", 
-                       plot=T, 
-                       log_scale=T))
-```
-
-
-We can specify any alternative environmental parameters using env_parameters to see the full list of avilable parameters (326)
-```{r}
-env_variables = sdmpredictors::list_layers()
-marine_layers = env_variables[env_variables$marine==T, ]
-```
-
-## Function #7 *oceanFuture*
-Allows accessing, analyzing and mapping future trends in temeperature and other environmental parameters according to different IPCC scenarios
-
-In the following example, we will access and map expected increases in Sea Surface Temperature data for 2100 according to different IPCC scenarios
-```{r}
-SST_2100_RCP8.5 = oceanFuture(IPCC_scenario = "RCP85")
-SST_2100_RCP4.5 = oceanFuture(IPCC_scenario = "RCP45")
-SST_2100_RCP2.5 = oceanFuture(IPCC_scenario = "RCP26")
-```
-
-You can check other available enviornmental parameters with avaialable future projections
-```{r}
-env_variables_future = sdmpredictors::list_layers_future()
-```
-
-Other examples of potentially useful environmental drivers expected to change
-```{r}
-#Maximum Surface Salinity
-Surface_Salinity_max_2100_RCP8.5 = oceanFuture(env_parameter = "BO2_salinitymax_ss",
-                                               IPCC_scenario = "RCP45")
-#IPCC RCP4.5
-Surface_Salinity_max_2100_RCP2.5 = oceanFuture(env_parameter = "BO2_salinitymax_ss", 
-                                               IPCC_scenario = "RCP85")
-#Ice thick
-Ice_thick_trends_2100_RCP8.5 = oceanFuture(env_parameter = "BO2_icethickmax_ss",
-                                           IPCC_scenario = "RCP45")
-```
-
-## Function #8 *oceanVulnerab*
-Allows accessing future warming trends and linking them to global hotspots of high biodiversity 
-
-In this example, we analyze and plot hotspots of Acropora biodiversity and the expected warming trends according to three IPPC scenarios. 
-```{r}
-hotspots_vulnerb <- oceanVulnerab(biodiversity_grid = AcroporaHotspots,
-                    map_climtatic_impacts = F, plot_histograms = T)
 ```

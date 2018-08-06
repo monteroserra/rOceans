@@ -1,5 +1,5 @@
 ---
-tittle: rOceansNew - Examples
+tittle: Basic description of rOceans package, more details and examples in vignettes
 author: I. Montero-Serra
 date: 30/Jul/2018
 output: html_document
