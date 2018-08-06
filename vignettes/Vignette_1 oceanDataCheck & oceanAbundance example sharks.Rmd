@@ -5,8 +5,8 @@ date: 30/Jul/2018
 output: html_document
 ---
 
-This document describes how to use rOceans for computing abundance spatial patterns of abundance in marine species using raw data directly downloaded from OBIS and GBIF. Here we have an example of usage for scleractinian corals of the genus Acropora. 
-
+#Introduction
+This document describes how to use rOceans for computing abundance spatial patterns of abundance in marine species using raw data directly downloaded from OBIS and GBIF. Here we have an example of usage for shark species of the family Carcharhinidae.
 
 (1) Download rOceans from GitHub and load the package
 
@@ -52,7 +52,6 @@ Following with the Acropora example, we will use this function to compute global
 abundance_10 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=10)
 abundance_5 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=5)
 abundance_1 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=1)
-abundance_0.5 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=0.5)
 ```
 
 # Using oceanMaps to visualize Shark abundance patterns at different scales
@@ -70,11 +69,6 @@ oceanMaps(abundance_5, logScale=T, main="Sharks abundance (5x5)")
 Grid cells of 1º lat x 1º long
 ```{r}
 oceanMaps(abundance_1, logScale=T, main="Sharks abundance (1x1)")
-```
-
-Grid cells of 0.5º lat x 0.5º long
-```{r}
-oceanMaps(abundance_0.5, logScale=T, main="Sharks abundance (0.5x0.5)")
 ```
 
 #Focused analyses for specific regions
