@@ -60,7 +60,7 @@ Env_sharks_div = oceanEnvironment(biod_grid = Carcharhinidae_diversity[[2]],
 For corrected species richness
 ```{r,results = "hide", warning = FALSE,  message = FALSE}
 
-Env_sharks_div = oceanEnvironment(biod_grid = Carcharhinidae_diversity[[3]],
+Env_sharks_div_corr = oceanEnvironment(biod_grid = Carcharhinidae_diversity[[3]],
                                 biodiv_metric = "Corrected Richness", 
                                 plot=T, 
                                 log_scale=T)
@@ -68,10 +68,54 @@ Env_sharks_div = oceanEnvironment(biod_grid = Carcharhinidae_diversity[[3]],
 ```
 
 
+Regression models 
+```{r, results = "hide", warning = FALSE,  message = FALSE}
+library(ggplot2)
+
+richness = Env_sharks_div
+richness_corrected = Env_sharks_div_corr
+
+colnames(richness)[1] <- "S"
+colnames(richness_corrected)[1] <- "S"
+
+
+ggplot(data=richness, aes(x=BO2_tempmean_ss, y=S))  + 
+      scale_y_continuous(breaks=c(0,15,30,45,60))+
+      xlab("Temperature") + ylab("Richness") +
+      geom_point(stroke = 1.1, col="steelblue")+
+      geom_smooth(method = "gam", formula = y ~ s(x), col="black") +
+      theme_bw()
+
+ggplot(data=richness_corrected, aes(x=BO2_tempmean_ss, y=S))  + 
+      xlab("Temperature") + ylab("Corrected Richness") +
+      geom_point(stroke = 1.1, col="steelblue")+
+      scale_y_continuous(breaks=c(0,15,30,45,60))+
+      geom_smooth(method = "gam", formula = y ~ s(x), col="black") +
+      theme_bw()
+
+ggplot(data=richness, aes(x=BO_chlomean, y=S))  + 
+      xlab("Chlorophile concentration") + ylab("Richness") +
+      scale_y_continuous(breaks=c(0,15,30,45,60))+
+      geom_point(stroke = 1.1, col="forestgreen")+
+      geom_smooth(method = "gam", formula = y ~ s(x), col="black") +
+      theme_bw()
+
+ggplot(data=richness_corrected, aes(x=BO_chlomean, y=S))  + 
+      xlab("Chlorophile concentration") + ylab("Corrected Richness") +
+      geom_point(stroke = 1.1, col="forestgreen")+
+      scale_y_continuous(breaks=c(0,15,30,45,60))+
+      geom_smooth(method = "gam", formula = y ~ s(x), col="black") +
+      theme_bw()
+
+
+```
 
 ```{r}
 # to see the full list of avilable parameters (326)
 env_variables = sdmpredictors::list_layers()
 marine_layers = env_variables[env_variables$marine==T, ]
+
+head(marine_layers[,c(1:3)])
+
 ```
 

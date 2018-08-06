@@ -25,6 +25,7 @@ oceanHotspots = function (biodiversity_grid,
   rclmat = matrix(m, ncol=3, byrow=TRUE)
   biodiversity_classified = reclassify(biodiversity_grid, rclmat)
   
+  biodiversity_classified[biodiversity_classified==0] <- NA
   
   if(only_hotspots){
     
