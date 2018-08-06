@@ -10,35 +10,29 @@ rOceans is an R Package for exploring spatial trends in marine biodiversity and 
 
 ## rOceans functions list
 
-(1) *oceanDataAccess()* Access occurrences data from OBIS and GBIF for a list of species and provides options for data quality checks
-
-(2) *oceanDataCheck()* Automatically merges, checks and filters big datasets from OBIS and GBIF
-
-(3) *oceanAbundance()* Computes global or regional spatial grids of abundance of occurrences per grid cell at multiple scales
-
-(4) *oceanMaps()* rapid map visualization tool for representing spatial trends in biodiversity
-
-(5) *oceanDiversity()* computes spatial explicit layers of several diversity metrics including richness, corrected richness, Simpson and Shannon diversity
-
-(6) *oceanEnvironment()* Automatic access to data on global spatial layers of multiple environmental drivers and explores relationships to marine biodiversity metrics
-
-(7) *oceanFuture()* Access current and future environmental data layers and computes expected trends
-
-(8) *oceanHotspots()* classify sites in hotspots and coldspots of biodiversity
-
-(9) *oceanVulnerability()* explores vulnerability of sites by linking biodiversity classifications and expected warming trends
+   #    Functions' name       Description
+------ ---------------------- -------------------------
+  (1)   *oceanDataAccess*     access occurrences data from OBIS and GBIF for a                                   list of species and provides options for data                                      quality checks
+  (2)    *oceanDataCheck*     automatically merges, checks and filters large                                     datasets directly downoladed from OBIS and GBIF
+  (3)    *oceanAbundance*     computes global or regional spatial grids of                                       abundance of occurrences per grid cell at multiple                                 scales
+  (4)    *oceanMaps*          versatile visualization tool for representing                                      spatial trends in biodiversity
+  (5)    *oceanDiversity*     computes spatial explicit layers of several                                        diversity metrics including richness, corrected                                    richness, Simpson and Shannon diversity
+  (6)    *oceanEnvironment*   access to data on global spatial layers of multiple                                environmental drivers and explores relationships to                                marine biodiversity metrics
+  (7)    *oceanFuture*        access current and future environmental data layers                                and computes expected trends
+  (8)    *oceanHotspots*      classify sites in hotspots and coldspots of                                        biodiversity
+  (9)  *oceanVulnerability*   explores and ranks vulnerability of sites by                                       linking biodiversity classifications and expected                                  warming trends
+------ ---------------------- -------------------------
 
 
-Download rOceansNew from GitHub and load the package
-```{r}
-invisible(devtools::install_github("monteroserra/rOceans"))
-invisible(library(rOceans))
+Download rOceans from GitHub and load the package
+```{r, results = "hide", warning = FALSE,  message = FALSE}
+#devtools::install_github("monteroserra/rOceans")
+library(rOceans)
 
 ```
 
-
-## Function #2 *oceanDataCheck* 
-Allows merging, checking, filtering the raw data from OBIS and/or GBIF into a common standard database. It removes occurrences with inconsistent or inconmplete taxonomic information, land-based occurrences, and duplicate occurrences. 
+## Function 2 *oceanDataCheck* 
+This functions allows merging, checking, filtering raw data directly downloaded from OBIS and/or GBIF and creates a common standard database. It removes occurrences with inconsistent or inconmplete taxonomic information, non-marine (land-based) occurrences, and duplicate occurrences. 
 
 For this set of functions, we first  need to access and download data from GBIF (www.gbif.org) and OBIS (www.iobis.org). 
 
@@ -62,9 +56,7 @@ Acropora_Total_Checked = oceanDataCheck(GBIF_occurrences = Acropora_GBIF,
                                         source = "GBIF_&_OBIS")
 ```
 
-# Functions for analyzing and visualizing spatial trends in marine biodiversity
-
-## Function #3 *oceanAbundance* 
+## Function 3 *oceanAbundance* 
 Allows creating global or delimited spatial grids with abundance of occurrences per cell at differenc cell sizes. 
 
 Following with the Acropora example, we will use this function to compute global rasters of abundance per grid cell for Acropora species at different resolutions (10 x 10) (5 x 5) (1 x 1) and (0.5 x 0.5) using *cell_size*
@@ -76,7 +68,7 @@ Acropora_abundance_1x1 = oceanAbundance(occurrences = Acropora_Total_Checked, ce
 Acropora_abundance_0.5x0.5 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=0.5)
 ```
 
-## Function #3 *oceanMaps*  
+## Function 4 *oceanMaps*  
 A versatile data mapping tool for a rapid visualization of marine biodiversity patterns previously computed.  
 
 ```{r}

@@ -130,88 +130,69 @@ $(document).ready(function () {
 <p>rOceans is an R Package for exploring spatial trends in marine biodiversity and conservation. It contains functions to access and explore spatial patterns of marine biodiversity.</p>
 <div id="roceans-functions-list" class="section level2">
 <h2>rOceans functions list</h2>
-<ol style="list-style-type: decimal">
-<li><p><em>oceanDataAccess()</em> Access occurrences data from OBIS and GBIF for a list of species and provides options for data quality checks</p></li>
-<li><p><em>oceanDataCheck()</em> Automatically merges, checks and filters big datasets from OBIS and GBIF</p></li>
-<li><p><em>oceanAbundance()</em> Computes global or regional spatial grids of abundance of occurrences per grid cell at multiple scales</p></li>
-<li><p><em>oceanMaps()</em> rapid map visualization tool for representing spatial trends in biodiversity</p></li>
-<li><p><em>oceanDiversity()</em> computes spatial explicit layers of several diversity metrics including richness, corrected richness, Simpson and Shannon diversity</p></li>
-<li><p><em>oceanEnvironment()</em> Automatic access to data on global spatial layers of multiple environmental drivers and explores relationships to marine biodiversity metrics</p></li>
-<li><p><em>oceanFuture()</em> Access current and future environmental data layers and computes expected trends</p></li>
-<li><p><em>oceanHotspots()</em> classify sites in hotspots and coldspots of biodiversity</p></li>
-<li><p><em>oceanVulnerability()</em> explores vulnerability of sites by linking biodiversity classifications and expected warming trends</p></li>
-</ol>
-<p>Download rOceansNew from GitHub and load the package</p>
-<pre class="r"><code>invisible(devtools::install_github(&quot;monteroserra/rOceans&quot;))</code></pre>
-<pre><code>## Downloading GitHub repo monteroserra/rOceans@master
-## from URL https://api.github.com/repos/monteroserra/rOceans/zipball/master</code></pre>
-<pre><code>## Installing rOceans</code></pre>
-<pre><code>## &quot;C:/PROGRA~1/R/R-35~1.0/bin/x64/R&quot; --no-site-file --no-environ --no-save  \
-##   --no-restore --quiet CMD INSTALL  \
-##   &quot;C:/Users/monteroserra/AppData/Local/Temp/Rtmp8mEr9X/devtools1d041a102249/monteroserra-rOceans-cca31bf&quot;  \
-##   --library=&quot;C:/Users/monteroserra/Documents/R/win-library/3.5&quot;  \
-##   --install-tests</code></pre>
-<pre><code>## </code></pre>
-<pre class="r"><code>invisible(library(rOceans))</code></pre>
-<pre><code>## Loading required package: raster</code></pre>
-<pre><code>## Loading required package: sp</code></pre>
-<pre><code>## Loading required package: rgeos</code></pre>
-<pre><code>## rgeos version: 0.3-28, (SVN revision 572)
-##  GEOS runtime version: 3.6.1-CAPI-1.10.1 r0 
-##  Linking to sp version: 1.3-1 
-##  Polygon checking: TRUE</code></pre>
-<pre><code>## Loading required package: geosphere</code></pre>
-<pre><code>## Loading required package: maps</code></pre>
-<pre><code>## Loading required package: RColorBrewer</code></pre>
-<pre><code>## Loading required package: dbplyr</code></pre>
-<pre><code>## Warning: package 'dbplyr' was built under R version 3.5.1</code></pre>
-<pre><code>## Loading required package: robis</code></pre>
-<pre><code>## Warning: package 'robis' was built under R version 3.5.1</code></pre>
-<pre><code>## 
-## Attaching package: 'robis'</code></pre>
-<pre><code>## The following object is masked from 'package:raster':
-## 
-##     area</code></pre>
-<pre><code>## Loading required package: rgbif</code></pre>
-<pre><code>## Warning: package 'rgbif' was built under R version 3.5.1</code></pre>
-<pre><code>## Loading required package: dplyr</code></pre>
-<pre><code>## Warning: package 'dplyr' was built under R version 3.5.1</code></pre>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:dbplyr':
-## 
-##     ident, sql</code></pre>
-<pre><code>## The following objects are masked from 'package:rgeos':
-## 
-##     intersect, setdiff, union</code></pre>
-<pre><code>## The following objects are masked from 'package:raster':
-## 
-##     intersect, select, union</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre><code>## Loading required package: rgdal</code></pre>
-<pre><code>## rgdal: version: 1.3-3, (SVN revision 759)
-##  Geospatial Data Abstraction Library extensions to R successfully loaded
-##  Loaded GDAL runtime: GDAL 2.2.3, released 2017/11/20
-##  Path to GDAL shared files: C:/Users/monteroserra/Documents/R/win-library/3.5/rgdal/gdal
-##  GDAL binary built with GEOS: TRUE 
-##  Loaded PROJ.4 runtime: Rel. 4.9.3, 15 August 2016, [PJ_VERSION: 493]
-##  Path to PROJ.4 shared files: C:/Users/monteroserra/Documents/R/win-library/3.5/rgdal/proj
-##  Linking to sp version: 1.3-1</code></pre>
-<pre><code>## Loading required package: sdmpredictors</code></pre>
-<pre><code>## Warning: package 'sdmpredictors' was built under R version 3.5.1</code></pre>
-<pre><code>## Loading required package: vegan</code></pre>
-<pre><code>## Loading required package: permute</code></pre>
-<pre><code>## Loading required package: lattice</code></pre>
-<pre><code>## This is vegan 2.5-2</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="center">#</th>
+<th align="center">Functions’ name</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">(1)</td>
+<td align="center"><em>oceanDataAccess</em></td>
+<td align="left">Access occurrences data from OBIS and GBIF for a list of species and provides options for data quality checks</td>
+</tr>
+<tr class="even">
+<td align="center">(2)</td>
+<td align="center"><em>oceanDataCheck</em></td>
+<td align="left">Automatically merges, checks and filters large datasets directly downoladed from OBIS and GBIF</td>
+</tr>
+<tr class="odd">
+<td align="center">(3)</td>
+<td align="center"><em>oceanAbundance</em></td>
+<td align="left">Computes global or regional spatial grids of abundance of occurrences per grid cell at multiple scales</td>
+</tr>
+<tr class="even">
+<td align="center">(4)</td>
+<td align="center"><em>oceanMaps</em></td>
+<td align="left">versatile visualization tool for representing spatial trends in biodiversity</td>
+</tr>
+<tr class="odd">
+<td align="center">(5)</td>
+<td align="center"><em>oceanDiversity</em></td>
+<td align="left">computes spatial explicit layers of several diversity metrics including richness, corrected richness, Simpson and Shannon diversity</td>
+</tr>
+<tr class="even">
+<td align="center">(6)</td>
+<td align="center"><em>oceanEnvironment</em></td>
+<td align="left">access to data on global spatial layers of multiple environmental drivers and explores relationships to marine biodiversity metrics</td>
+</tr>
+<tr class="odd">
+<td align="center">(7)</td>
+<td align="center"><em>oceanFuture</em></td>
+<td align="left">access current and future environmental data layers and computes expected trends</td>
+</tr>
+<tr class="even">
+<td align="center">(8)</td>
+<td align="center"><em>oceanHotspots</em></td>
+<td align="left">classify sites in hotspots and coldspots of biodiversity</td>
+</tr>
+<tr class="odd">
+<td align="center">(9)</td>
+<td align="center"><em>oceanVulnerability</em></td>
+<td align="left">explores and ranks vulnerability of sites by linking biodiversity classifications and expected warming trends</td>
+</tr>
+</tbody>
+</table>
+<p>Download rOceans from GitHub and load the package</p>
+<pre class="r"><code>#♦devtools::install_github(&quot;monteroserra/rOceans&quot;)
+library(rOceans)</code></pre>
 </div>
 <div id="function-2-oceandatacheck" class="section level2">
-<h2>Function #2 <em>oceanDataCheck</em></h2>
-<p>Allows merging, checking, filtering the raw data from OBIS and/or GBIF into a common standard database. It removes occurrences with inconsistent or inconmplete taxonomic information, land-based occurrences, and duplicate occurrences.</p>
+<h2>Function 2 <em>oceanDataCheck</em></h2>
+<p>This functions allows merging, checking, filtering raw data directly downloaded from OBIS and/or GBIF and creates a common standard database. It removes occurrences with inconsistent or inconmplete taxonomic information, non-marine (land-based) occurrences, and duplicate occurrences.</p>
 <p>For this set of functions, we first need to access and download data from GBIF (www.gbif.org) and OBIS (www.iobis.org).</p>
 <p>Here I show an example with data of species within the genus <em>Acropora</em> that were directly downloaded from the website on June 2018. The data can be accessed from my GitHub repository “monteroserra/rOceanData” or using data()</p>
 <pre class="r"><code>#Accesing raw datasets
@@ -237,11 +218,8 @@ Acropora_OBIS_checked = oceanDataCheck(OBIS_occurrences = Acropora_OBIS, source 
 ## 1214 data points containing NAs were deleted
 ## 1914 land data points were deleted</code></pre>
 </div>
-</div>
-<div id="functions-for-analyzing-and-visualizing-spatial-trends-in-marine-biodiversity" class="section level1">
-<h1>Functions for analyzing and visualizing spatial trends in marine biodiversity</h1>
 <div id="function-3-oceanabundance" class="section level2">
-<h2>Function #3 <em>oceanAbundance</em></h2>
+<h2>Function 3 <em>oceanAbundance</em></h2>
 <p>Allows creating global or delimited spatial grids with abundance of occurrences per cell at differenc cell sizes.</p>
 <p>Following with the Acropora example, we will use this function to compute global rasters of abundance per grid cell for Acropora species at different resolutions (10 x 10) (5 x 5) (1 x 1) and (0.5 x 0.5) using <em>cell_size</em></p>
 <pre class="r"><code>Acropora_abundance_10x10 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=10)
@@ -249,8 +227,8 @@ Acropora_abundance_5x5 = oceanAbundance(occurrences = Acropora_Total_Checked, ce
 Acropora_abundance_1x1 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=1)
 Acropora_abundance_0.5x0.5 = oceanAbundance(occurrences = Acropora_Total_Checked, cell_size=0.5)</code></pre>
 </div>
-<div id="function-3-oceanmaps" class="section level2">
-<h2>Function #3 <em>oceanMaps</em></h2>
+<div id="function-4-oceanmaps" class="section level2">
+<h2>Function 4 <em>oceanMaps</em></h2>
 <p>A versatile data mapping tool for a rapid visualization of marine biodiversity patterns previously computed.</p>
 <pre class="r"><code>par(mfrow=c(2,2))
 oceanMaps(Acropora_abundance_10x10, logScale=T, main=&quot;Acropora abundance (10x10)&quot;)
