@@ -1,7 +1,7 @@
 ---
 tittle: Exploring environmental drivers of species diversity in sharks
 author: I. Montero-Serra
-date: 30/Jul/2018
+date: 5/AUG/2018
 output: html_document
 ---
 
@@ -9,15 +9,15 @@ output: html_document
 
 This document describes how to use rOceans for accessing environmental drivers and link them to spatial patterns of diversity in marine species. Here we show an example for sharks of family Carcharhinidae.  
 
-(1) Download rOceans from GitHub and load the package
+Download rOceans from GitHub and load the package
 
 ```{r, results = "hide", warning = FALSE,  message = FALSE}
-#devtools::install_github("monteroserra/rOceans")
+devtools::install_github("monteroserra/rOceans")
 library(rOceans)
 
 ```
 
-## First, we need to access the data and compute species diversity
+First, we need to access the data and compute species diversity
 
 For simplicity, we provide the dataset "Carcharhinidae_total_checked" which is the output obtained using *oceanDataCheck()* applied to raw datasets from OBIS and GBIF (see vignette 1 with Acropora example for more details on checking and filtering raw data)
 
@@ -37,15 +37,41 @@ Computing species abundance matrix - and several diversity metrics
 ```{r,results = "hide", warning = FALSE,  message = FALSE}
 Carcharhinidae_diversity = oceanDiversity(occurrences = Carcharhinidae_total_checked, print=F)
 
+
+#Visualize richness
+oceanMaps(Carcharhinidae_diversity[[2]], logScale=T, 
+          main="Carcharhinidae richness")
+
 ```
 
-## Obtaining and using environmental drivers
 
+#Obtaining and using environmental drivers
 
+For raw species richness
 ```{r,results = "hide", warning = FALSE,  message = FALSE}
 
-
+Env_sharks_div = oceanEnvironment(biod_grid = Carcharhinidae_diversity[[2]],
+                                biodiv_metric = "Species Richness", 
+                                plot=T, 
+                                log_scale=T)
 
 ```
 
+For corrected species richness
+```{r,results = "hide", warning = FALSE,  message = FALSE}
+
+Env_sharks_div = oceanEnvironment(biod_grid = Carcharhinidae_diversity[[3]],
+                                biodiv_metric = "Corrected Richness", 
+                                plot=T, 
+                                log_scale=T)
+
+```
+
+
+
+```{r}
+# to see the full list of avilable parameters (326)
+env_variables = sdmpredictors::list_layers()
+marine_layers = env_variables[env_variables$marine==T, ]
+```
 
