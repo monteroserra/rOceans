@@ -8,6 +8,8 @@ output: html_document
 #  Global Biodiversity Patterns in Marine Benthic Ecosystems using rOceans
 rOceans is an R Package for exploring spatial trends in marine biodiversity and conservation. It contains functions to access and explore spatial patterns of marine biodiversity. 
 
+## Shiny App: https://monteroserra.shinyapps.io/rOceansApp/
+
 ## rOceans functions list
 
    #    Functions' name       Description
