@@ -5,9 +5,9 @@ date: 10/Aug/2018
 output: pdf_document
 ---
 
-# rOceans - Google Summer Code 2018 by Ignasi Montero-Serra 
+# rOceans (GSoC2018) by Ignasi Montero-Serra 
 
-This file describes the recently developed rOceans package and the datapackage rOceansData and contains a comprehensive study case. The project has been lead by Ignasi Montero-Serra and fundend by Google within the program Google Summer Code 2018.  
+This file describes the recently developed rOceans package, the datapackage rOceansData and contains a study case on marine benthic biodiversity. The project has been lead by Ignasi Montero-Serra and fundend by Google within the program Google Summer Code 2018.  
 
 ## Deliverable 1 rOceans
 rOceans is an R Package for exploring spatial trends in marine biodiversity and conservation. It contains functions to facilitate the accessibility and exploration of spatial trends of marine biodiversity, current environmental drivers and future global change scenarios.

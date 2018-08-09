@@ -11,7 +11,8 @@
 oceanHotspots = function (biodiversity_grid, 
                           only_hotspots=F, 
                           map_hotspots = T,
-                          main="", cex.main=0.8) {
+                          main="", cex.main=0.8,
+                          background_color="grey70") {
   
   ## Framework for classififying into low - mid - high diversity sites
   min_diversity = minValue(biodiversity_grid)
@@ -27,17 +28,19 @@ oceanHotspots = function (biodiversity_grid,
   
   biodiversity_classified[biodiversity_classified==0] <- NA
   
-  if(only_hotspots){
+if(only_hotspots){
     
     biodiversity_classified[biodiversity_classified<3] <- NA
     
-  } 
+} 
   
-  if(map_hotspots) {
+if(map_hotspots) {
     
-    oceanMaps(biodiversity_classified, hotspots_map = T)
-    
-  }
+  plot(biodiversity_classified, col=c("steelblue", "gold","firebrick"), add=F, legend=F)
+  maps::map("world", fill = T,add=T,col=background_color)
+  maps::map.axes()
+  
+}
   
   return(biodiversity_classified)
   
