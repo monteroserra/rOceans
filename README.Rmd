@@ -2,7 +2,7 @@
 tittle: rOceans Package - rOceansData Package & Study Case (GSoC2018)
 author: I. Montero-Serra
 date: 10/Aug/2018
-output: pdf_document
+output: html_document
 ---
 
 # rOceans (GSoC2018) by Ignasi Montero-Serra 
@@ -278,6 +278,14 @@ oceanMaps(Seagrasses_diversity[[3]], logScale=T,background_color = "grey70", mai
 ```
 
 
+Now we can use te function *oceanHotspots()* to classify biodiversity sites in high (red); mid(yellow) and low (blue) biodiversity
+
+```{r}
+par(mfrow=c(2,2))
 
 
+oceanHotspots(Anthozoa_diversity[[3]], map_hotspots = T)
+oceanHotspots(Bryzoa_diversity[[3]], map_hotspots = T)
+oceanHotspots(Macroalgae_diversity[[3]], map_hotspots = T)
+oceanHotspots(Seagrasses_diversity[[3]], map_hotspots = T)
 
