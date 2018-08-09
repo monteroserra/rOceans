@@ -1,8 +1,10 @@
 ---
+author: "I. Montero-Serra"
+date: "10/Aug/2018"
+output:
+  pdf_document: default
+  html_document: default
 tittle: rOceans Package - rOceansData Package & Study Case (GSoC2018)
-author: I. Montero-Serra
-date: 10/Aug/2018
-output: html_document
 ---
 
 # rOceans (GSoC2018) by Ignasi Montero-Serra 
@@ -12,11 +14,12 @@ This file describes the recently developed rOceans package, the datapackage rOce
 ## Deliverable 1 rOceans
 rOceans is an R Package for exploring spatial trends in marine biodiversity and conservation. It contains functions to facilitate the accessibility and exploration of spatial trends of marine biodiversity, current environmental drivers and future global change scenarios.
 
+
 ## Deliverable 2 rOceansData
-rOceansData is an R DataPackage that contains several marine biodiversity layers and environmental drivers to make easy explorations using rOceans. 
+rOceansData is an R DataPackage that contains several marine biodiversity layers and environmental drivers to make easy explorations using rOceans. It is stored in github.com/monteroserra/rOceansData
+
 
 ## Deliverable 3 rOceansApp
-
 Is an R Shiny App that alllos an easy visualization of some examples of marine biodiversity computed using rOceans. The App can be explored at: 
 
 https://monteroserra.shinyapps.io/rOceansApp/
@@ -278,14 +281,48 @@ oceanMaps(Seagrasses_diversity[[3]], logScale=T,background_color = "grey70", mai
 ```
 
 
+Getting current layers of envioronmental parameters and linking them to biodiversity patterns
+```{r, results = "hide", warning = FALSE,  message = FALSE}
+
+oceanEnvironment(biod_grid = Anthozoa_diversity[[3]],
+                             biodiv_metric = "Correced Richness", 
+                             plot=T, 
+                             log_scale=T)
+
+```
+
+
+
 Now we can use te function *oceanHotspots()* to classify biodiversity sites in high (red); mid(yellow) and low (blue) biodiversity
 
 ```{r}
 par(mfrow=c(2,2))
 
-
 oceanHotspots(Anthozoa_diversity[[3]], map_hotspots = T)
-oceanHotspots(Bryzoa_diversity[[3]], map_hotspots = T)
+oceanHotspots(Bryozoa_diversity[[3]], map_hotspots = T)
 oceanHotspots(Macroalgae_diversity[[3]], map_hotspots = T)
 oceanHotspots(Seagrasses_diversity[[3]], map_hotspots = T)
+
+```
+
+
+Finally, the function *oceanVulnerability()* allows us to use future climate change scenarios, that can be accessed using *oceanFuture()* and explore potential climatic vulenrability of high biodiversity sites. 
+
+
+```{r, results = "hide", warning = FALSE,  message = FALSE}
+
+par(mfrow=c(2,2))
+
+
+oceanVulnerability(Anthozoa_diversity[[3]], plot_histograms = F)
+
+oceanVulnerability(Seagrasses_diversity[[3]], plot_histograms = F)
+
+
+```
+
+These maps show potential vulnerability rankings of hotspots of biodiversity in Anthozoans and Seagrasses
+
+
+
 
