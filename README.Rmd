@@ -1,11 +1,11 @@
 ---
-tittle: rOceans package - rOceansData package & Study Case
+tittle: rOceans Package - rOceansData Package & Study Case (GSoC2018)
 author: I. Montero-Serra
-date: 30/Jul/2018
-output: html_document
+date: 10/Aug/2018
+output: pdf_document
 ---
 
-# rOceans - Google Summer Code 2018 
+# rOceans - Google Summer Code 2018 by Ignasi Montero-Serra 
 
 This file describes the recently developed rOceans package and the datapackage rOceansData and contains a comprehensive study case. The project has been lead by Ignasi Montero-Serra and fundend by Google within the program Google Summer Code 2018.  
 
